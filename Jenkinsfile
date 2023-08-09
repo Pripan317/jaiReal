@@ -14,7 +14,7 @@ pipeline {
         
         stage("Git Checkout"){
             steps{
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/jaiswaladi246/Petclinic.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Pripan317/jaiReal.git'
             }
         }
         
@@ -60,8 +60,8 @@ pipeline {
                    withDockerRegistry(credentialsId: '58be877c-9294-410e-98ee-6a959d73b352', toolName: 'docker') {
                         
                         sh "docker build -t image1 ."
-                        sh "docker tag image1 adijaiswal/pet-clinic123:latest "
-                        sh "docker push adijaiswal/pet-clinic123:latest "
+                        sh "docker tag image1 Pripan317/pet-clinic123:latest "
+                        sh "docker push Pripan317/pet-clinic123:latest "
                     }
                 }
             }
@@ -69,13 +69,13 @@ pipeline {
         
         stage("TRIVY"){
             steps{
-                sh " trivy image adijaiswal/pet-clinic123:latest"
+                sh " trivy image Pripan317/pet-clinic123:latest"
             }
         }
         
         stage("Deploy To Tomcat"){
             steps{
-                sh "cp  /var/lib/jenkins/workspace/CI-CD/target/petclinic.war /opt/apache-tomcat-9.0.65/webapps/ "
+                sh "cp  /var/lib/jenkins/workspace/CICD/target/petclinic.war /opt/apache-tomcat-9.0.65/webapps/ "
             }
         }
     }
