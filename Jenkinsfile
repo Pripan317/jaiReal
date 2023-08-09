@@ -73,9 +73,9 @@ pipeline {
             }
         }
         
-        stage("Deploy To Tomcat"){
+        stage("Deploy To Docker"){
             steps{
-                sh "cp  /var/lib/jenkins/workspace/CICD/target/petclinic.war /opt/apache-tomcat-9.0.65/webapps/ "
+                sh "docker run -d --name pet1 -p 8085:8085 Pripan317/pet-clinic123:latest "
             }
         }
     }
